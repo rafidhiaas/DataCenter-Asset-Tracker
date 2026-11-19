@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "DataCenter Tracker",
+    "name": "IT Infrastructure Asset Tracker",
     "slug": "datacenter-tracker",
     "scheme": "datacentertracker",
     "version": "1.0.0",

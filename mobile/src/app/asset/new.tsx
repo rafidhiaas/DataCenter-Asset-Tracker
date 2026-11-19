@@ -72,7 +72,7 @@ export default function NewAssetScreen() {
           />
         }
         subtitle="Lengkapi identitas, lokasi, dan data jaringan aset."
-        title="Tambah Aset"
+        title="Tambah Asset"
         variant="compact"
       />
       <AssetForm

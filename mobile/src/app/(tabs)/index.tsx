@@ -148,12 +148,12 @@ export default function DashboardScreen() {
               <Text style={styles.avatarLabel}>{initialsOf(user?.fullName ?? '') || 'DC'}</Text>
             </View>
           }
-          subtitle="Ringkasan aset data center hari ini."
+          subtitle="Ringkasan Asset Hari ini."
           title={`${greeting()}, ${user?.fullName.split(' ')[0] ?? 'Pengguna'}`}
         >
           <View style={styles.heroCard}>
             <View style={styles.heroText}>
-              <Text style={styles.heroLabel}>Total aset</Text>
+              <Text style={styles.heroLabel}>Total asset</Text>
               <Text style={styles.heroValue}>{animatedTotal}</Text>
             </View>
             <DonutChart
@@ -173,7 +173,7 @@ export default function DashboardScreen() {
             </DonutChart>
           </View>
           <Text style={styles.heroNote}>
-            {risk ? `${risk.assetsWithoutPrediction} aset belum diprediksi` : 'Memuat prediksi...'}
+            {risk ? `${risk.assetsWithoutPrediction} asset belum diprediksi` : 'Memuat prediksi...'}
             {risk?.lastPredictedAt ? ` · terakhir ${formatDateTime(risk.lastPredictedAt)}` : ''}
           </Text>
         </GradientHeader>
@@ -203,7 +203,7 @@ export default function DashboardScreen() {
                 />
                 <StatTile
                   icon="trending-up-outline"
-                  label="Aset baru bulan ini"
+                  label="Asset baru bulan ini"
                   tone="success"
                   value={stats.addedThisMonth}
                 />

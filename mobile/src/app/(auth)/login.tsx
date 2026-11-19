@@ -101,9 +101,9 @@ export default function LoginScreen() {
             <View style={styles.logo}>
               <Ionicons color={colors.primary} name="server" size={26} />
             </View>
-            <Text style={styles.brand}>DataCenter Tracker</Text>
+            <Text style={styles.brand}>IT Infrastructure Asset Tracker</Text>
             <Text style={styles.tagline}>
-              Kelola inventaris, jaringan, dan risiko aset data center dari satu tempat.
+              Kelola Server, Network, dan risiko aset data center dari satu tempat.
             </Text>
           </LinearGradient>
 

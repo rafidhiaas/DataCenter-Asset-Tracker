@@ -165,21 +165,21 @@ export default function AssetsScreen() {
         <View style={styles.headerRow}>
           <View style={styles.titleBlock}>
             <Text accessibilityRole="header" style={styles.title}>
-              Aset
+              Asset
             </Text>
             <Text style={styles.count}>
               {pagination
                 ? hasFilter
                   ? `${pagination.total} aset cocok`
-                  : `${pagination.total} aset terdaftar`
+                  : `${pagination.total} Asset terdaftar`
                 : loading
                   ? 'Memuat...'
-                  : 'Jumlah aset tidak tersedia'}
+                  : 'Jumlah asset tidak tersedia'}
             </Text>
           </View>
           {isAdmin ? (
             <Pressable
-              accessibilityLabel="Tambah aset"
+              accessibilityLabel="Tambah Asset"
               accessibilityRole="button"
               onPress={() => router.push('/asset/new')}
               style={({ pressed }) => [pressed ? styles.pressed : null]}

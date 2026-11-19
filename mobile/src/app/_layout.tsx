@@ -154,7 +154,7 @@ function Splash() {
       <View style={styles.logo}>
         <Ionicons color={colors.primary} name="server" size={28} />
       </View>
-      <Text style={styles.title}>DataCenter Tracker</Text>
+      <Text style={styles.title}>IT Infrastructure Asset Tracker</Text>
       <Text style={styles.caption}>Inventaris, jaringan, dan risiko aset dalam satu tempat.</Text>
       <ActivityIndicator color={colors.onPrimary} style={styles.spinner} />
     </LinearGradient>

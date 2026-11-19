@@ -1,0 +1,69 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { create } from 'zustand';
+import { createJSONStorage, persist } from 'zustand/middleware';
+
+import { loginRequest } from '../api/auth';
+import { unregisterPushToken } from '../notifications/push';
+import { setSessionToken } from '../api/session';
+import type { User } from '../types/api';
+
+interface AuthState {
+  token: string | null;
+  user: User | null;
+  isHydrated: boolean;
+  isSubmitting: boolean;
+  login: (username: string, password: string) => Promise<void>;
+  logout: () => Promise<void>;
+  updateUser: (user: User) => void;
+  loadFromStorage: () => Promise<void>;
+}
+
+export const useAuthStore = create<AuthState>()(
+  persist(
+    (set) => ({
+      token: null,
+      user: null,
+      isHydrated: false,
+      isSubmitting: false,
+
+      async login(username, password) {
+        set({ isSubmitting: true });
+        try {
+          const { token, user } = await loginRequest(username, password);
+          set({ token, user });
+        } finally {
+          set({ isSubmitting: false });
+        }
+      },
+
+      async logout() {
+        // Remove the device token while the bearer token is still valid, then
+        // clear the session. Push cleanup never blocks logout on failure.
+        await unregisterPushToken();
+        set({ token: null, user: null });
+      },
+
+      // The persisted session is the only copy of the profile, so a successful
+      // edit must replace it or the greeting/avatar would stay stale.
+      updateUser(user) {
+        set({ user });
+      },
+
+      async loadFromStorage() {
+        await useAuthStore.persist.rehydrate();
+      },
+    }),
+    {
+      name: 'datacenter-tracker-auth',
+      storage: createJSONStorage(() => AsyncStorage),
+      partialize: (state) => ({ token: state.token, user: state.user }),
+      onRehydrateStorage: () => () => {
+        useAuthStore.setState({ isHydrated: true });
+      },
+    },
+  ),
+);
+
+// Keep the HTTP client's token in sync without letting it import this store.
+useAuthStore.subscribe((state) => setSessionToken(state.token));
+setSessionToken(useAuthStore.getState().token);
